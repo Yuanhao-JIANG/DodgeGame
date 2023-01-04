@@ -4,11 +4,13 @@ export(PackedScene) var mob_scene
 var score
 
 func _ready():
+	$Player.hide()
 	randomize()
-	new_game()
 
 
 func game_over():
+	$Music.stop()
+	$DeathSound.play()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -21,6 +23,7 @@ func new_game():
 	$HUD.show_message("Get Ready")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$Music.play()
 
 
 func _on_MobTimer_timeout():
